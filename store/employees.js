@@ -48,5 +48,30 @@ export const actions = {
     } else {
       commit('error', response.problem)
     }
-  }
+  },
+  async newEmployee({ commit, dispatch }, payload) {
+    const response = await api.post(`employees`, payload)
+    if (response.ok) {
+      dispatch('fetchEmployees')
+    } else {
+      commit('error', response.problem)
+    }
+  },
+  async updateEmployee({ commit, dispatch }, payload) {
+    const response = await api.put(`employees`, payload)
+    if (response.ok) {
+      dispatch('fetchProducts')
+    } else {
+      commit('error', response.problem)
+    }
+  },
+  async deleteEmployee({ commit, dispatch }, payload) {
+    const { id } = payload
+    const response = await api.delete(`employees/${id}`)
+    if (response.ok) {
+      dispatch('fetchEmployees')
+    } else {
+      commit('error', response.problem)
+    }
+  },
 }
